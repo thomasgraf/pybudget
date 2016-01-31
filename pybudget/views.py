@@ -8,8 +8,27 @@ from .models import (
     Expense,
     )
 
+class ExpenseViews(object):
+    def __init__(self, request):
 
-@view_config(route_name='home', renderer='templates/mytemplate.pt')
+        self.request = request
+        #send_mail(request)
+
+
+    @view_config(route_name='view_expense', renderer="templates/site_view.pt")
+    def view_expense(self):
+        return {'project':'pybudget'}
+
+    @view_config(route_name='edit_expense', renderer="templates/site_view.pt")
+    def edit_expense(self):
+        return {'one':'one'}
+
+    @view_config(route_name='add_expense', renderer="templates/site_view.pt")
+    def add_expense(self):
+        return {'one':'one'}
+
+
+@view_config(route_name='view_budget', renderer='templates/mytemplate.pt')
 def my_view(request):
     try:
         one = DBSession.query(Expense).filter(Expense.expense_date == '2016-01-31').first()
