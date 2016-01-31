@@ -8,12 +8,13 @@ from pyramid.paster import (
     get_appsettings,
     setup_logging,
     )
+import datetime
 
 from pyramid.scripts.common import parse_vars
 
 from ..models import (
     DBSession,
-    MyModel,
+    Expense,
     Base,
     )
 
@@ -36,5 +37,5 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-        model = MyModel(name='one', value=1)
+        model = Expense(amount='3.67', expense_date=datetime.date(2016, 1, 31))
         DBSession.add(model)
