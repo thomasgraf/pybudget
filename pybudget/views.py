@@ -17,6 +17,7 @@ class ExpenseViews(object):
 
     @view_config(route_name='view_expense', renderer="templates/site_view.pt")
     def view_expense(self):
+
         return {'project':'pybudget'}
 
     @view_config(route_name='edit_expense', renderer="templates/site_view.pt")
@@ -31,7 +32,7 @@ class ExpenseViews(object):
 @view_config(route_name='view_budget', renderer='templates/mytemplate.pt')
 def my_view(request):
     try:
-        one = DBSession.query(Expense).filter(Expense.expense_date == '2016-01-31').first()
+        one = DBSession.query(Expense).filter(Expense.expense_date == '2016-01-31').all()
     except DBAPIError:
         return Response(conn_err_msg, content_type='text/plain', status_int=500)
     return {'one': one, 'project': 'pybudget'}
